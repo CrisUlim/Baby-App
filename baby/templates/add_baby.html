@@ -1,0 +1,39 @@
+{% extends 'user_base.html' %}
+{% set account = "account" %}
+{% block title %}
+   Add Baby
+{% endblock %}
+{% block content %}
+<h1>Add Baby</h1>
+<div class="insights">
+   <div class="account-profile">
+      <h3>Baby Profile</h3>
+      <form >
+        <div class="form-conteiner">
+            <input type="text" required="required">
+            <label>Name</label>
+            
+        </div>
+        <br>
+        <div class="form-conteiner">
+            <input type="text" required="required">
+            <label>Baby Number Id</label>
+        </div>
+        <br>
+        <div class="form-conteiner">
+            <input type="text" required="required">
+            <label>Baby Weight (g or Kg)</label>
+        </div>
+        <br>
+        <div class="form-conteiner">
+            <input type="text" required="required">
+            <label>Gender</label>
+        </div>
+        <br>
+        <button class="button-17" role="button">Save</button>
+        
+      </form>
+   </div>
+   
+</div>
+{% endblock %}
