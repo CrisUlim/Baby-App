@@ -1,0 +1,136 @@
+{% extends 'user_base.html' %}
+{% set home = "home" %}
+{% block title %}
+   Home
+{% endblock %}
+{% block content %}
+
+                <h1>Dashboard</h1>
+                <div class="date">
+                    <h2>{{date}}</h2>
+                </div>
+                <div class="insights">
+                    <div>
+                        <canvas id="temperature"></canvas>
+                    </div>
+                    <div>
+                        <canvas id="heartrate"></canvas>
+                    </div>
+                    <div>
+                        <canvas id="oxygenlevel"></canvas>
+                    </div>
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    const ctx = document.getElementById('temperature');
+                    const ctx1 = document.getElementById('heartrate');
+                    const ctx2= document.getElementById('oxygenlevel');
+
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                        labels: [{%for row in extracted_data%},
+                                    "{{row['Date']}}",
+                                 {%endfor%}],
+                        datasets: [{
+                            label: 'Temperature',
+                            data: [{%for row in extracted_data%},
+                                     {{row['Temp']}},
+                                    {%endfor%}],
+                            borderWidth: 2,
+                            backgroundColor: 'rgb(98, 228, 92)',
+                            borderColor: 'rgb(98, 228, 92)',
+                            spanGaps: true
+                        }]
+                        },
+                        options: {
+                        scales: {
+                            y: {
+                            beginAtZero: false
+                            }
+                        }
+                        }
+                    });
+                    new Chart(ctx1, {
+                        type: 'line',
+                        data: {
+                        labels: [{%for row in extracted_data%},
+                                    "{{row['Date']}}",
+                                 {%endfor%}],
+                        datasets: [{
+                            label: 'Heart Rate',
+                            data: [{%for row in extracted_data%},
+                                     {{row['Heart']}},
+                                    {%endfor%}],
+                            borderWidth: 2,
+                            backgroundColor: 'rgb(225, 34, 41)', 
+                            borderColor: 'rgb(225, 34, 41)',
+                            spanGaps: true
+                        }]
+                        },
+                        options: {
+                        scales: {
+                            y: {
+                            beginAtZero: false
+                            }
+                        }
+                        } 
+                    });
+                    new Chart(ctx2, {
+                        type: 'line',
+                        data: {
+                        labels: [{%for row in extracted_data%},
+                                    "{{row['Date']}}",
+                                 {%endfor%}],
+                        datasets: [{
+                            label: 'Oxygen Level',
+                            data: [{%for row in extracted_data%},
+                                     {{row['Oxygen']}},
+                                    {%endfor%}],
+                            borderWidth: 2,
+                            backgroundColor: 'rgb(1, 185, 242)',
+                            borderColor: 'rgb(1, 185, 242)',
+                            spanGaps: true
+
+                        }]
+                        },
+                        options: {
+                        scales: {
+                            y: {
+                            beginAtZero: false
+                            }
+                        }
+                        } 
+                    });
+                </script>
+                
+                <div class="recent-data">
+                    <h2>Recent Data</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Baby Name</th>
+                                <th>BPM</th>
+                                <th>Oxygen Level -%</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Alex</td>
+                                <td>98 bpm</td>
+                                <td>86 %</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            <tr>
+                                <td>Jhon</td>
+                                <td>125 bpm</td>
+                                <td>67 %</td>
+                                <td class="primary">Details</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <a href="#">Show All</a>
+                </div>
+{%endblock%}

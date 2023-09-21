@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Temperature and Time Chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin: 0 auto;">
+        <canvas id="live-chart"></canvas>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('live-chart').getContext('2d');
+        var temperatureData = [];
+        var timeData = [];
+        var chart;
+
+        function updateChart() {
+            // Simulate live temperature and time data
+            var newTemperature = Math.random() * 30 + 20; // Random temperature between 20 and 50
+            var now = new Date();
+            var time = now.toLocaleTimeString();
+
+            temperatureData.push(newTemperature);
+            timeData.push(time);
+
+            // Keep the chart data to a reasonable length (e.g., 20 data points)
+            if (temperatureData.length > 20) {
+                temperatureData.shift();
+                timeData.shift();
+            }
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: timeData,
+                    datasets: [{
+                        label: 'Temperature (°C)',
+                        data: temperatureData,
+                        borderColor: 'blue',
+                        backgroundColor: 'rgba(0, 0, 255, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Temperature (°C)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update the chart every 2 seconds
+        setInterval(updateChart, 2000);
+    </script>
+</body>
+</html>

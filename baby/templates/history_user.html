@@ -1,0 +1,36 @@
+{% extends 'user_base.html' %}
+{% set history = "history" %}
+{% block title %}
+   History
+{% endblock %}
+{% block content %}
+
+<div class="recent-data">
+   <h1>Heart Rate and Oxygen</h1>
+   <table>
+       <thead>
+           <tr>
+               <th>Baby Name</th>
+               <th>Temperature</th>
+               <th>BPM</th>
+               <th>Oxygen Level -%</th>
+               
+               
+           </tr>
+       </thead>
+       {% for row in extracted_data%}
+           <tbody>
+               <tr>
+                   <td>Alex</td>
+                   <td>{{row['Temperature']}}</td>
+                   <td>{{row['Heart Rate']}} bpm</td>
+                   <td>{{row['Oxygen Level']}} %</td>
+               </tr>
+           </tbody>
+       {%endfor%}
+   </table>
+   <a href="#">Show All</a>
+</div>
+
+
+{% endblock %}
