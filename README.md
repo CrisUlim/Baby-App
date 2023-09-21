@@ -11,8 +11,7 @@ To run the application, use the following command:
 >python3 app.py
 
 Open your browser and go to localhost, usually http://127.0.0.1:5000/.
-![Screenshot from 2023-07-10 22-53-36](<img src="https://github.com/CrisUlim/Baby-App/blob/main/baby/static/img/login.jpg" width="150" height="280" >)
-<div style="width: 150px; height: 150px">
+<div style="width: 150; height: 150">
   
   ![](https://github.com/CrisUlim/Baby-App/blob/main/baby/static/img/login.jpg)
   
